@@ -18,7 +18,7 @@ var config = {
     idleTimeoutMillis: 3000
   }
 };
-
+var sen;
 //以回调函数为参数的function：获取事物
 function getTransaction(callback)
 {
@@ -29,6 +29,14 @@ function getTransaction(callback)
     callback(sql,transaction);
   })
 };
+
+function getsen(sqlsen,callback2)
+{
+  sen=sqlsen;
+  return sen;
+  callback2(getTransaction);
+}
+
 function funsearch(sql,transaction)
 {
   transaction.begin(function(err){
@@ -40,7 +48,8 @@ function funsearch(sql,transaction)
     var request = new sql.Request(transaction);
     //search test4 begin----------------------------------------------------------------------------------------------------------------------------
     var task4 = function(callback){
-      request.query('select * from test1',function(err,result) {
+      //request.query('select * from test1',function(err,result) {
+      request.query(sen,function(err,result) {
         if (err) {
           console.log(err);
           callback(err, null);
@@ -54,9 +63,6 @@ function funsearch(sql,transaction)
     };
 
     async.series([task4],function(err,result){
-    //async.series([task4],function(err,result){
-      //设置错误测试回滚用
-      //var err = "11";
       if (err) {
         console.log('出现错误,执行回滚');
         if (!rolledBack) {
@@ -89,6 +95,6 @@ function funsearch(sql,transaction)
   })
 }
 module.exports={
-  getTransaction,funsearch
+  getTransaction,getsen,funsearch
 };
 //getTransaction(funsearch);
