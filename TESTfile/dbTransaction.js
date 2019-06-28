@@ -5,6 +5,7 @@ QQ : 452076103 意外金喜
  */
 var dbTransaction = {};
 var sql = require('mssql');
+//数据库配置
 var config = {
   user: "NODE1",
   password: "NODE1NODE1",

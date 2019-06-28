@@ -4,7 +4,7 @@
  */
 var async  = require('async');
 var dbTransaction = require('./dbTransaction.js');
-
+var searchid=11;
 dbTransaction.getTransaction(function(sql, transaction){
 	//开启事物
 	transaction.begin(function(err) {
@@ -45,7 +45,7 @@ dbTransaction.getTransaction(function(sql, transaction){
   	};
     //insert test2 begin----------------------------------------------------------------------------------------------------------------------------
   	var task2 = function(callback){
-  		request.query("insert into test1 (id,name, age) values ('22','a2', 22)", function(err, result) {
+  		request.query("insert into test1 (id,name, age) values ('22','a2', 444)", function(err, result) {
   			if (err) {
   				console.log(err);
   				callback(err, null);
@@ -116,7 +116,7 @@ var task6= function(callback){
   })
 };
 
-    async.series([task4],function(err,result){
+    async.series([task4,task6,task4,task2,task4,task5,task4],function(err,result){
       //设置错误测试回滚用
       //var err = "11";
 			if (err) {
