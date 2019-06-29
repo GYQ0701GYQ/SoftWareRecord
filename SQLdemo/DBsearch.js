@@ -19,12 +19,12 @@ var config = {
   }
 };
 var sen;
+//var sqlsen='select * from test1';
 //以回调函数为参数的function：获取事物
 function getTransaction(callback)
 {
   var connection = new sql.ConnectionPool(config, function forCP(err)
   {
-    //以err为参数:定义了transaction和callback
     var transaction = new sql.Transaction(connection);
     callback(sql,transaction);
   })
@@ -58,7 +58,7 @@ function funsearch(sql,transaction)
         console.log('--------------------第4条语句成功------SELECT----------------------------');
        console.log(result);
        console.log('------------------------------------------------------------\n\n');
-        callback(null, result)
+        callback(null, result);
       })
     };
 
@@ -94,7 +94,13 @@ function funsearch(sql,transaction)
 
   })
 }
+
 module.exports={
   getTransaction,getsen,funsearch
 };
-//getTransaction(funsearch);
+
+//exports.result=result;
+/*
+getsen(sqlsen,getTransaction);
+getTransaction(funsearch);
+*/
