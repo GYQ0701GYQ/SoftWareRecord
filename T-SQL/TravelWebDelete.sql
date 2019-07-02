@@ -1,0 +1,7 @@
+DROP TABLE order_
+DROP TABLE item
+DROP TABLE visit
+DROP TABLE route
+DROP TABLE sight
+DROP TABLE firm
+DROP TABLE user_
